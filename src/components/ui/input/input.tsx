@@ -5,6 +5,10 @@ interface InputProps extends React.HTMLProps<HTMLInputElement> {
   placeholder?: string;
   extraClass?: string;
   isLimitText?: boolean;
+  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
+  onIconClick?(e: React.MouseEvent<HTMLDivElement>): void;
+  onBlur?(e?: React.FocusEvent<HTMLInputElement>): void;
+  onFocus?(e?: React.FocusEvent<HTMLInputElement>): void;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -13,12 +17,12 @@ export const Input: React.FC<InputProps> = ({
   type = "text",
   maxLength,
   max,
-  isLimitText = false,
+  isLimitText = true,
   ...rest
 }) => {
   const limitText =
     type === "text"
-      ? `Максимум — ${maxLength} символа`
+      ? `Максимум — ${maxLength} символов`
       : `Максимальное число — ${max}`;
 
   return (

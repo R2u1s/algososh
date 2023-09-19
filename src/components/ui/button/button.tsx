@@ -9,15 +9,16 @@ interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   text?: string;
   type?: "button" | "submit" | "reset";
   sorting?: Direction;
-  linkedList?: "small" | "big";
+  linkedList?: "small" | "big" | 'medium';
   isLoader?: boolean;
   extraClass?: string;
+  onClick?:(e:any) => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   text,
   extraClass = "",
-  type = "button",
+  type = "button", 
   isLoader = false,
   sorting,
   linkedList,
