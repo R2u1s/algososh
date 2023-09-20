@@ -1,9 +1,9 @@
 # Проектная работа. МБОУ АЛГОСОШ им. Фибоначчи
 Визуализация работы алгоритмов и операций со структурами данных [Перейти на сайт](https://r2u1s.github.io/react-burger/) 
 
-![screenshot](https://github.com/R2u1s/algososh/tree/month-12/step-1/src/images/screen1.jpg)
-
 ![screenshot](https://github.com/R2u1s/algososh/tree/month-12/step-1/src/images/screen2.jpg)
+
+![screenshot](https://github.com/R2u1s/algososh/tree/month-12/step-1/src/images/screen1.jpg)
 
 ## Технологии
 * React
