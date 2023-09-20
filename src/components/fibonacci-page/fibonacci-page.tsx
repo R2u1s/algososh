@@ -8,6 +8,7 @@ import { Circle } from "../ui/circle/circle";
 import { getFibonacciNumbers, arrayToIterations } from "../../utils/utils";
 
 const INPUT_TEXT = 'text';
+const MAX_NUMBER = 19;
 
 export const FibonacciPage: React.FC = () => {
 
@@ -47,7 +48,7 @@ export const FibonacciPage: React.FC = () => {
               name={INPUT_TEXT}
               type="number"
               placeholder="Введите текст"
-              max={19}
+              max={MAX_NUMBER}
               onChange={e => handleChange(e)}
             >
             </Input>
@@ -55,7 +56,7 @@ export const FibonacciPage: React.FC = () => {
               type="submit"
               text='Раccчитать'
               isLoader={activeFib ? true : false}
-              disabled={activeFib ? true : false}
+              disabled={(activeFib || !values[INPUT_TEXT] || parseInt(values[INPUT_TEXT])>MAX_NUMBER || parseInt(values[INPUT_TEXT])<1) ? true : false}
             >
             </Button>
           </form>
@@ -71,7 +72,7 @@ export const FibonacciPage: React.FC = () => {
           }
         </div>
       )
-    }, [animation,activeFib]
+    }, [animation,activeFib,values]
   );
 
   return (

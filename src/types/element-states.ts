@@ -12,3 +12,9 @@ export enum LoaderStates {
   AddIndex = "AddIndex",
   RemoveIndex = "RemoveIndex"
 }
+
+export enum LoaderAddDelete {
+  Add = "Add",
+  Delete = "Delete"
+}
+

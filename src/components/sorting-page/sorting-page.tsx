@@ -29,7 +29,6 @@ export const SortingPage: React.FC = () => {
       array: newArr
     });
     setAnimation(firstSortIteration(newArr)[0]);
-    console.log(animation);
   }
 
   if (animation.length === 0) {newArray()}

@@ -53,7 +53,7 @@ export const StringComponent: React.FC = () => {
               type="submit"
               text='Развернуть'
               isLoader={active ? true : false}
-              disabled={active ? true : false}
+              disabled={(active || !values[INPUT_TEXT]) ? true : false}
             >
             </Button>
           </form>
@@ -72,7 +72,7 @@ export const StringComponent: React.FC = () => {
 
         </div>
       )
-    }, [animation,active]
+    }, [animation,values,active]
   );
 
   return (

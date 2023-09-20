@@ -7,17 +7,19 @@ import { Circle } from "../ui/circle/circle";
 import { elementColor,initQueue } from "../../utils/utils";
 import { Queue } from "../../classes/Queue";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { LoaderAddDelete } from "../../types/element-states";
 
 export const QUEUE_SIZE = 7;
 
 export const QueuePage: React.FC = () => {
   const [inputValue, setInputValue] = React.useState<string>(''); //управляемый инпут
-  const [active, setActive] = React.useState(false); //состояние для отключения кнопок во время анимации
+  const [active, setActive] = React.useState<LoaderAddDelete | boolean>(false); //состояние для отключения кнопок во время анимации и спиннера
   const [animation, setAnimation] = React.useState<Array<string[]> | undefined>(initQueue()); //массив элементов стэка для отображения [значение,цвет круга]
   const [queue,setQueue] = React.useState<Queue<string>>(new Queue<string>(QUEUE_SIZE));//записываем queue в состояние, чтобы он сохранялся
 
-  const addButton = () => {
-    setActive(true);
+  const addButton = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setActive(LoaderAddDelete.Add);
     queue.enqueue(inputValue);
     setInputValue('');
     queue.getSize() > 0 && setTimeout(() => { setAnimation(newIterationQueue(true,queue.getTail())) }, 0);
@@ -25,7 +27,7 @@ export const QueuePage: React.FC = () => {
   }
 
   const removeButton = () => {
-    setActive(true);
+    setActive(LoaderAddDelete.Delete);
     setAnimation(newIterationQueue(true,queue.getHead()));
     queue.dequeue();
     setTimeout(() => { setAnimation(newIterationQueue()); setActive(false) }, SHORT_DELAY_IN_MS);
@@ -34,6 +36,7 @@ export const QueuePage: React.FC = () => {
   const clearButton = () => {
     queue.clear();
     setAnimation(initQueue());
+    setActive(false)
   }
 
   //функция для создания кадра анимации. Если light = true нужно подсветить последний элемент
@@ -71,16 +74,18 @@ export const QueuePage: React.FC = () => {
             >
             </Input>
             <Button
-              type="button"
+              type="submit"
               text='Добавить'
               onClick={addButton}
-              disabled={(active || (queue.getTail()===QUEUE_SIZE-1) || !inputValue) ? true : false}>
+              disabled={(active || (queue.getTail()===QUEUE_SIZE-1) || !inputValue) ? true : false}
+              isLoader={active === LoaderAddDelete.Add ? true : false}>
             </Button>
             <Button
               type="button"
               text='Удалить'
               onClick={removeButton}
-              disabled={(active || !(queue.getSize()>0))? true : false}>
+              disabled={(active || !(queue.getSize()>0))? true : false}
+              isLoader={active === LoaderAddDelete.Delete ? true : false}>
             </Button>
             <div className={styles['queue__clear']}>
               <Button

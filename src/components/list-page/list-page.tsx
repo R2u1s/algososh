@@ -16,7 +16,7 @@ export const LIST_SIZE = 5;
 export const ListPage: React.FC = () => {
   const [inputValue, setInputValue] = React.useState<string>(''); //управляемый инпут
   const [inputIndexValue, setInputIndexValue] = React.useState<string>('');
-  const [active, setActive] = React.useState<LoaderStates | boolean>(false); //состояние для отключения кнопок во время анимации
+  const [active, setActive] = React.useState<LoaderStates | boolean>(false); //состояние для отключения кнопок во время анимации и спиннера
   const [list, setList] = React.useState<LinkedList<string>>(new LinkedList<string>());//записываем list в состояние, чтобы он сохранялся
 
   if (list.getSize() === 0) { //инициализация списка
@@ -28,7 +28,8 @@ export const ListPage: React.FC = () => {
 
   const [animation, setAnimation] = React.useState<Array<Array<string | null>>>(initLinkedList(list.print())); //массив элементов стэка для отображения [значение,цвет круга]
 
-  const addHeadButton = () => {
+  const addHeadButton = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setActive(LoaderStates.AddHead);
     //1ый кадр с кружком над первым элементом
     let newIter = animation;
@@ -121,7 +122,8 @@ export const ListPage: React.FC = () => {
     }, DELAY_IN_MS);
   }
 
-  const addIndexButton = () => {
+  const addIndexButton = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setActive(LoaderStates.AddIndex);
 
     const index = parseInt(inputIndexValue, 10);
@@ -224,10 +226,10 @@ export const ListPage: React.FC = () => {
               </div>
               <Button
                 extraClass={styles['list__button']}
-                type="button"
+                type="submit"
                 text='Добавить в head'
                 onClick={addHeadButton}
-                disabled={(active || (list.getSize()>LIST_SIZE)) ? true : false}
+                disabled={(active || (list.getSize()>LIST_SIZE) || !inputValue) ? true : false}
                 isLoader={active === LoaderStates.AddHead ? true : false}
               >
               </Button>
@@ -236,7 +238,7 @@ export const ListPage: React.FC = () => {
                 type="button"
                 text='Добавить в tail'
                 onClick={addTailButton}
-                disabled={(active || (list.getSize()>LIST_SIZE)) ? true : false}
+                disabled={(active || (list.getSize()>LIST_SIZE) || !inputValue) ? true : false}
                 isLoader={active === LoaderStates.AddTail ? true : false}
               >
               </Button>
@@ -273,10 +275,16 @@ export const ListPage: React.FC = () => {
               </div>
               <Button
                 extraClass={styles['list__button']}
-                type="button"
+                type="submit"
                 text='Добавить по индексу'
                 onClick={addIndexButton}
-                disabled={(active || (list.getSize()>LIST_SIZE) || !inputIndexValue || !inputValue) ? true : false}
+                disabled={(
+                  active || 
+                  (list.getSize()>LIST_SIZE) || 
+                  !inputIndexValue || 
+                  !inputValue ||
+                  parseInt(inputIndexValue)>list.getSize()-1 ||
+                  parseInt(inputIndexValue)<0) ? true : false}
                 isLoader={active === LoaderStates.AddIndex ? true : false}
               >
               </Button>
@@ -285,7 +293,12 @@ export const ListPage: React.FC = () => {
                 type="button"
                 text='Удалить по индексу'
                 onClick={removeIndexButton}
-                disabled={(active || !(list.getSize()>1) || !inputIndexValue) ? true : false}
+                disabled={(
+                  active || 
+                  (list.getSize()>LIST_SIZE) || 
+                  !inputIndexValue ||
+                  parseInt(inputIndexValue)>list.getSize()-1 ||
+                  parseInt(inputIndexValue)<0) ? true : false}
                 isLoader={active === LoaderStates.RemoveIndex ? true : false}
               >
               </Button>

@@ -7,16 +7,18 @@ import { Circle } from "../ui/circle/circle";
 import { elementColor } from "../../utils/utils";
 import { Stack } from "../../classes/Stack";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { LoaderAddDelete } from "../../types/element-states";
 
 export const StackPage: React.FC = () => {
 
   const [inputValue, setInputValue] = React.useState<string>(''); //управляемый инпут
-  const [active, setActive] = React.useState(false); //состояние для отключения кнопок во время анимации
+  const [active, setActive] = React.useState<LoaderAddDelete | boolean>(false); //состояние для отключения кнопок во время анимации и спиннера
   const [animation, setAnimation] = React.useState<Array<string[]> | undefined>([]); //массив элементов стэка для отображения [значение,цвет круга]
   const [stack,setStack] = React.useState<Stack<string>>(new Stack<string>());//записываем стэк в состояние, чтобы он сохранялся
 
-  const addButton = () => {
-    setActive(true);
+  const addButton = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setActive(LoaderAddDelete.Add);
     stack.push(inputValue);
     setInputValue('');
     stack.getSize() > 0 && setTimeout(() => { setAnimation(newIterationStack(true)) }, 0);
@@ -24,14 +26,16 @@ export const StackPage: React.FC = () => {
   }
 
   const removeButton = () => {
+    setActive(LoaderAddDelete.Delete);
     setAnimation(newIterationStack(true));
     stack.pop();
-    setTimeout(() => { setAnimation(newIterationStack()) }, SHORT_DELAY_IN_MS);
+    setTimeout(() => { setAnimation(newIterationStack()); setActive(false) }, SHORT_DELAY_IN_MS);
   }
 
   const clearButton = () => {
     stack.clear();
     setAnimation([]);
+    setActive(false);
   }
 
   //функция для создания кадра анимации. Если light = true нужно подсветить последний элемент
@@ -69,16 +73,18 @@ export const StackPage: React.FC = () => {
             >
             </Input>
             <Button
-              type="button"
+              type="submit"
               text='Добавить'
               onClick={addButton}
-              disabled={active ? true : false}>
+              disabled={active || !inputValue ? true : false}
+              isLoader={active === LoaderAddDelete.Add ? true : false}>
             </Button>
             <Button
               type="button"
               text='Удалить'
               onClick={removeButton}
-              disabled={(active || !(stack.getSize()>0))? true : false}>
+              disabled={(active || !(stack.getSize()>0))? true : false}
+              isLoader={active === LoaderAddDelete.Delete ? true : false}>
             </Button>
             <div className={styles['stack__clear']}>
               <Button
