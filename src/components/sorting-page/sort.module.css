@@ -1,0 +1,48 @@
+.sort__content {
+  margin:0 auto;
+  max-width: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap:48px;
+}
+
+.sort__settings {
+  margin:0 auto;
+  max-width: 980px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center ;
+}
+
+.sort__radios {
+  margin:0;
+  margin-right: 52px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+  gap: 40px;
+}
+
+.sort__directions {
+  margin:0;
+  margin-right: 80px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+  gap: 12px;
+}
+
+.sort__result {
+  margin:0 auto;
+  max-width: 100%;
+  min-height:340px;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  gap:10px;
+}

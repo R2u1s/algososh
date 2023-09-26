@@ -1,0 +1,33 @@
+.stack__content {
+  margin: 0 auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 120px;
+}
+
+.stack__input {
+  margin: 0 auto;
+  min-width: 567px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.stack__clear {
+  margin: 0;
+  margin-left: 80px;
+}
+
+.stack__result {
+  margin: 0 auto;
+  max-width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap:72px 16px;
+}

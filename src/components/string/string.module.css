@@ -1,0 +1,27 @@
+.string__input {
+  margin:0 auto;
+  min-width: 567px;
+  max-width:100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:12px;
+}
+
+.string__content {
+  margin:0 auto;
+  max-width: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap:120px;
+}
+
+.string__result {
+  margin:0 auto;
+  max-width: 100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap:16px;
+}
