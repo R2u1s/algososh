@@ -133,9 +133,9 @@ export const SortingPage: React.FC = () => {
 
           {sort.array.length > 0 &&
             <div className={styles['sort__result']}>
-              {animation && animation.map(iter => {
+              {animation && animation.map((iter,index) => {
                 {
-                  return <Column state={elementColor(iter[1].toString())} index={typeof iter[0] === 'string' ? parseInt(iter[0]) : iter[0]} key={Math.random()}></Column>
+                  return <Column state={elementColor(iter[1].toString())} index={typeof iter[0] === 'string' ? parseInt(iter[0]) : iter[0]} key={index}></Column>
                 }
               })}
             </div>

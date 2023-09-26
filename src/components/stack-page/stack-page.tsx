@@ -108,7 +108,7 @@ export const StackPage: React.FC = () => {
                 letter={iter[0]} 
                 index={index}
                 head={head} 
-                key={Math.random()}></Circle>
+                key={index}></Circle>
               })}
 
             </div>

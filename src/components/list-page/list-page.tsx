@@ -307,7 +307,7 @@ export const ListPage: React.FC = () => {
           {animation &&
             <div className={styles['list__result']}>
               {animation.map((iter, index) => {
-                return <div className={styles['list__flex']} key={Math.random()}>
+                return <div className={styles['list__flex']} key={index}>
                   <Circle
                     state={elementColor(iter[1])}
                     letter={iter[0] ? iter[0] : ''}

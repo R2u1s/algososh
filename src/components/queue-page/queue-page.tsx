@@ -106,7 +106,7 @@ export const QueuePage: React.FC = () => {
                 head={queue.getHead()===index && (queue.getSize()>0 || queue.getHead() !==0) ? 'head' : ''}
                 tail={queue.getTail()===index && iter[0] ? 'tail' : ''} 
                 index={index} 
-                key={Math.random()}></Circle>
+                key={index}></Circle>
               })}
             </div>
           }

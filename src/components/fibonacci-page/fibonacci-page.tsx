@@ -49,7 +49,7 @@ export const FibonacciPage: React.FC = () => {
               type="number"
               placeholder="Введите текст"
               max={MAX_NUMBER}
-              onChange={e => handleChange(e)}
+              onChange={handleChange}
             >
             </Input>
             <Button
@@ -65,7 +65,7 @@ export const FibonacciPage: React.FC = () => {
             <div className={styles['fibonacci__result']}>
               {animation.map((num, index) => {
                 {
-                  return <Circle letter={String(num)} key={Math.random()} index={index}></Circle>
+                  return <Circle letter={String(num)} key={index} index={index}></Circle>
                 }
               })}
             </div>

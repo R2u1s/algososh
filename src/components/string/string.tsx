@@ -60,9 +60,9 @@ export const StringComponent: React.FC = () => {
 
           {animation &&
             <div className={styles['string__result']}>
-              {animation.map(letter => {
+              {animation.map((letter,index) => {
                 {
-                  return <Circle state={elementColor(letter[1])} letter={letter[0]} key={Math.random()}></Circle>
+                  return <Circle state={elementColor(letter[1])} letter={letter[0]} key={index}></Circle>
                 }
 
               })}
