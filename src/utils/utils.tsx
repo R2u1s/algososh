@@ -74,7 +74,7 @@ export const reverse = (str: string): Array<Array<string[]>> => {
     start++;
     end--;
   }
-  //console.log(animationArr);
+  
   return animationArr;
 }
 

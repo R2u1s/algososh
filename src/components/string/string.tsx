@@ -23,6 +23,7 @@ export const StringComponent: React.FC = () => {
 
   React.useEffect(
     () => {
+      console.log(reverse(''));
       if (values[INPUT_TEXT] && active) {
       const iterations = reverse(values[INPUT_TEXT]);
       iterations.forEach((iter, i) => {
