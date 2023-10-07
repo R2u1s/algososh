@@ -125,6 +125,7 @@ export const firstSortIteration = (arr: number[]): Array<Array<Array<number | st
 }
 
 export const bubbleSort = (arr: number[], dir: boolean): Array<Array<Array<number | string>>> => {
+  if (!(arr.length > 0)) return [];
   const { length } = arr;
   //создаем массив подкадровой анимации
   let animationArr = [];
@@ -150,14 +151,16 @@ export const bubbleSort = (arr: number[], dir: boolean): Array<Array<Array<numbe
     }
     //новый кадр, в нём последнее число - на своем месте, а предыдущее снова в исходном цвете
     let newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-    newAnimation[length - i - 2] = [arr[length - i - 2], 'default'];
+    if (length - i - 2 > 0) newAnimation[length - i - 2] = [arr[length - i - 2], 'default'];
     newAnimation[length - i - 1] = [arr[length - i - 1], 'modified'];
     animationArr.push(newAnimation);
   }
+
   return animationArr;
 }
 
 export const selectionSort = (arr: number[], dir: boolean): Array<Array<Array<number | string>>> => {
+  if (!(arr.length > 0)) return [];
   const { length } = arr;
   //создаем массив подкадровой анимации
   let animationArr = [];
