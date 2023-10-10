@@ -1,6 +1,6 @@
 describe('Корректная работа роутинга', function () {
   beforeEach(function () {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
     cy.contains('МБОУ АЛГОСОШ');
   });
 

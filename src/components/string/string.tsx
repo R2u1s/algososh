@@ -6,6 +6,7 @@ import { Input } from "../ui/input/input";
 import { useForm } from "../../hooks/useForm";
 import { Circle } from "../ui/circle/circle";
 import { elementColor, reverse } from "../../utils/utils";
+import { DELAY_IN_MS } from "../../constants/delays";
 
 const INPUT_TEXT = 'text';
 
@@ -30,7 +31,7 @@ export const StringComponent: React.FC = () => {
           setAnimation(iter);
           if (i === iterations.length-1) {
             setActive(false)}
-        }, i * 1000);
+        }, i * DELAY_IN_MS);
       });
     }
     },
