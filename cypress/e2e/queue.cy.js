@@ -89,6 +89,7 @@ describe('Корректная работа страницы "Стек"', functi
           cy.get('@circle').should('have.css', 'border', consequence[step].animation[iteration][index].color); //проверяем цвет круга
           cy.get('@circle_index').should('have.text', index); //проверяем значение индекса
           cy.get('@circle_head').should('have.text', consequence[step].animation[iteration][index].head);//проверяем значение head
+          cy.get('@circle_tail').should('have.text', consequence[step].animation[iteration][index].tail);//проверяем значение tail
         });
         cy.wait(SHORT_DELAY_IN_MS);
       }
@@ -121,6 +122,7 @@ describe('Корректная работа страницы "Стек"', functi
         cy.get('@circle').should('have.css', 'border', consequence[step].animation[iteration][index].color); //проверяем цвет круга
         cy.get('@circle_index').should('have.text', index); //проверяем значение индекса
         cy.get('@circle_head').should('have.text', consequence[step].animation[iteration][index].head);//проверяем значение head
+        cy.get('@circle_tail').should('have.text', consequence[step].animation[iteration][index].tail);//проверяем значение tail
       });
       cy.wait(SHORT_DELAY_IN_MS);
     }
@@ -151,6 +153,7 @@ describe('Корректная работа страницы "Стек"', functi
       cy.get('@circle').should('have.css', 'border', consequence[step].animation[0][index].color); //проверяем цвет круга
       cy.get('@circle_index').should('have.text', index); //проверяем значение индекса
       cy.get('@circle_head').should('have.text', consequence[step].animation[0][index].head);//проверяем значение head
+      cy.get('@circle_tail').should('have.text', consequence[step].animation[0][index].tail);//проверяем значение tail
     });
 
   });
