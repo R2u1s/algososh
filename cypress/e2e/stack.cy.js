@@ -72,7 +72,7 @@ describe('Корректная работа страницы "Стек"', functi
     cy.get('button').contains('Удалить').parent().as(ButtonTest.Remove);
     cy.get('button').contains('Очистить').parent().as(ButtonTest.Clear);
 
-    //основной цикл - проходим по действиям пользователя, вложенный - проходимся по кругам
+    //основной цикл - проходим по действиям пользователя, вложенный - проходимся кадрам анимации
     for (let step = 0; step < consequence.length; step++) {
       if (consequence[step].action.value) {cy.get('input').type(consequence[step].action.value)}; //если нужно что-то вводить в инпут, вводим
       cy.get(`@${consequence[step].action.button}`).click();
