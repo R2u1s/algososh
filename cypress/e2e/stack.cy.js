@@ -40,24 +40,24 @@ describe('Корректная работа страницы "Стек"', functi
       {
         action: { button: ButtonTest.Add, value: '2' },           //добавление элемента со значением 2
         animation: [
-          [{ value: '1', color: ColorTest.Changing, head: null }, { value: '2', color: ColorTest.Changing, head: 'top' }],
-          [{ value: '1', color: ColorTest.Default, head: null }, { value: '2', color: ColorTest.Default, head: 'top' }]
+          [{ value: '1', color: ColorTest.Default, head: '' }, { value: '2', color: ColorTest.Changing, head: 'top' }],
+          [{ value: '1', color: ColorTest.Default, head: '' }, { value: '2', color: ColorTest.Default, head: 'top' }]
         ]
       },
       //3ий шаг
       {
         action: { button: ButtonTest.Add, value: '3' },           //добавление элемента со значением 3
         animation: [
-          [{ value: '1', color: ColorTest.Changing, head: null }, { value: '2', color: ColorTest.Changing, head: null }, { value: '3', color: ColorTest.Changing, head: 'top' }],
-          [{ value: '1', color: ColorTest.Default, head: null }, { value: '2', color: ColorTest.Default, head: null }, { value: '3', color: ColorTest.Default, head: 'top' }]
+          [{ value: '1', color: ColorTest.Default, head: '' }, { value: '2', color: ColorTest.Default, head: '' }, { value: '3', color: ColorTest.Changing, head: 'top' }],
+          [{ value: '1', color: ColorTest.Default, head: '' }, { value: '2', color: ColorTest.Default, head: '' }, { value: '3', color: ColorTest.Default, head: 'top' }]
         ]
       },
       //4ый шаг
       {
         action: { button: ButtonTest.Remove, value: null },       //удаление элемента
         animation: [
-          [{ value: '1', color: ColorTest.Changing, head: null }, { value: '2', color: ColorTest.Changing, head: null }, { value: '3', color: ColorTest.Changing, head: 'top' }],
-          [{ value: '1', color: ColorTest.Default, head: null }, { value: '2', color: ColorTest.Default, head: 'top' }]
+          [{ value: '1', color: ColorTest.Default, head: '' }, { value: '2', color: ColorTest.Default, head: '' }, { value: '3', color: ColorTest.Changing, head: 'top' }],
+          [{ value: '1', color: ColorTest.Default, head: '' }, { value: '2', color: ColorTest.Default, head: 'top' }]
         ]
       },
       //5ый шаг
@@ -78,7 +78,7 @@ describe('Корректная работа страницы "Стек"', functi
       cy.get(`@${consequence[step].action.button}`).click();
 
       if (consequence[step].animation.length > 0) { //если массив анимации не пустой, проходим по нему
-        for (let iteration = 0; iteration < consequence[step].animation; iteration++) {
+        for (let iteration = 0; iteration < consequence[step].animation.length; iteration++) {
           cy.get('[class^="circle_content"]').as('circle_content');
           cy.get('@circle_content').each(($circle_content, index) => {
             cy.get($circle_content).find('[class^="circle_circle"]').as('circle');
