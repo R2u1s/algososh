@@ -1,7 +1,7 @@
 import {ColorTest} from "../../src/types/element-states";
 import {SHORT_DELAY_IN_MS} from "../../src/constants/delays"
 
-describe('Корректная работа роутинга', function () {
+describe('Корректная работа страницы "Последовательности Фибоначчи', function () {
   beforeEach(function () {
     cy.visit('/fibonacci');
   });
