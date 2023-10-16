@@ -1,14 +1,15 @@
 import React from 'react';
 import { reverse } from '../../utils/utils';
+import { CIRCLE_COLOR_MODIFIED } from '../../constants/color';
 
 describe("Алгоритм разворота строки", () => {
   test("Корректный разворот строки с четным числом символов", () => {
     const str = 'abcd';
     const correctAnswer = [
-      ['d','modified'],
-      ['c','modified'],
-      ['b','modified'],
-      ['a','modified']
+      ['d',CIRCLE_COLOR_MODIFIED],
+      ['c',CIRCLE_COLOR_MODIFIED],
+      ['b',CIRCLE_COLOR_MODIFIED],
+      ['a',CIRCLE_COLOR_MODIFIED]
     ];
     const res = reverse(str);
     expect(res[res.length-1]).toStrictEqual(correctAnswer);
@@ -17,11 +18,11 @@ describe("Алгоритм разворота строки", () => {
   test("Корректный разворот строки с нечетным числом символов", () => {
     const str = 'abcde';
     const correctAnswer = [
-      ['e','modified'],
-      ['d','modified'],
-      ['c','modified'],
-      ['b','modified'],
-      ['a','modified']
+      ['e',CIRCLE_COLOR_MODIFIED],
+      ['d',CIRCLE_COLOR_MODIFIED],
+      ['c',CIRCLE_COLOR_MODIFIED],
+      ['b',CIRCLE_COLOR_MODIFIED],
+      ['a',CIRCLE_COLOR_MODIFIED]
     ];
     const res = reverse(str);
     expect(res[res.length-1]).toStrictEqual(correctAnswer);
@@ -30,7 +31,7 @@ describe("Алгоритм разворота строки", () => {
   test("Корректный разворот строки с одним символом", () => {
     const str = 'a';
     const correctAnswer = [
-      ['a','modified']
+      ['a',CIRCLE_COLOR_MODIFIED]
     ];
     const res = reverse(str);
     expect(res[res.length-1]).toStrictEqual(correctAnswer);

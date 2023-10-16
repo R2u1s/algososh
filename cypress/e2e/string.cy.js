@@ -1,5 +1,6 @@
 import {ColorTest} from "../../src/types/element-states";
-import {DELAY_IN_MS} from "../../src/constants/delays"
+import {DELAY_IN_MS} from "../../src/constants/delays";
+import {CLASS_CIRCLE} from "../../src/constants/test";
 
 describe('Корректная работа страницы "Строка', function () {
   beforeEach(function () {
@@ -22,7 +23,7 @@ describe('Корректная работа страницы "Строка', fun
 
     cy.get('input').type('abcd');
     cy.get('button[type=submit]').click();
-    cy.get('[class^="circle_circle"]').should('have.length', 4).as('circle');
+    cy.get(CLASS_CIRCLE).should('have.length', 4).as('circle');
 
     for(let iteration = 0;iteration<res.length;iteration++){
       cy.get('@circle').each(($circle,letter)=>{

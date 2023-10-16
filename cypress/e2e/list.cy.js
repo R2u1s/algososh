@@ -1,5 +1,6 @@
 import { ColorTest } from "../../src/types/element-states";
 import { DELAY_IN_MS } from "../../src/constants/delays"
+import { CLASS_CIRCLE, CLASS_CIRCLE_SMALL, CLASS_HEAD, CLASS_INDEX, CLASS_TAIL } from "../../src/constants/test";
 
 export const ButtonTest = {
   AddHead: 'button_add_head',
@@ -185,31 +186,31 @@ describe('Корректная работа страницы "Связный с�
       cy.get('[class^="list_list__result"] > [class^="list_list__flex"]').as('circle_content');
       cy.get('@circle_content').should('have.length', consequence[step].animation[iteration].length).each(($circle_content, index) => {
         //проверяем основной круг
-        cy.get($circle_content).find('[class^="circle_circle"]').not('[class*="circle_small"]').as('circle');
-        cy.get('@circle').parent().find('[class*="circle_index"]').as('circle_index');
+        cy.get($circle_content).find(CLASS_CIRCLE).not(CLASS_CIRCLE_SMALL).as('circle');
+        cy.get('@circle').parent().find(CLASS_INDEX).as('circle_index');
         cy.get('@circle').should('have.text', consequence[step].animation[iteration][index].value); //проверяем значение буквы в круге
         cy.get('@circle').should('have.css', 'border', consequence[step].animation[iteration][index].color); //проверяем цвет круга
         cy.get('@circle_index').should('have.text', index); //проверяем значение индекса
 
         //проверяем head
         if (consequence[step].animation[iteration][index].colorHead !== '') { //если ожидается, что в head есть круг, то ищем его
-          cy.get($circle_content).find('[class*="circle_small"]').as('circle_head_circle');
+          cy.get($circle_content).find(CLASS_CIRCLE_SMALL).as('circle_head_circle');
           cy.get('@circle_head_circle').should('have.text', consequence[step].animation[iteration][index].head); //проверяем значение буквы в круге
           cy.get('@circle_head_circle').should('have.css', 'border', consequence[step].animation[iteration][index].colorHead); //проверяем цвет круга
         }
         else { //если круга не должно быть, то проверяем значение в head
-          cy.get($circle_content).find('[class*="circle_head"]').first().as('circle_head');
+          cy.get($circle_content).find(CLASS_HEAD).first().as('circle_head');
           cy.get('@circle_head').should('have.text', consequence[step].animation[iteration][index].head);
         };
 
         //проверяем tail
         if (consequence[step].animation[iteration][index].colorTail !== '') { //если ожидается, что в tail есть круг, то ищем его
-          cy.get($circle_content).find('[class*="circle_small"]').as('circle_tail_circle');
+          cy.get($circle_content).find(CLASS_CIRCLE_SMALL).as('circle_tail_circle');
           cy.get('@circle_tail_circle').should('have.text', consequence[step].animation[iteration][index].tail); //проверяем значение буквы в круге
           cy.get('@circle_tail_circle').should('have.css', 'border', consequence[step].animation[iteration][index].colorTail); //проверяем цвет круга
         }
         else { //если круга не должно быть, то проверяем значение в tail
-          cy.get($circle_content).find('[class*="circle_tail"]').first().as('circle_tail');
+          cy.get($circle_content).find(CLASS_TAIL).first().as('circle_tail');
           cy.get('@circle_tail').should('have.text', consequence[step].animation[iteration][index].tail);
         };
       });
@@ -224,9 +225,9 @@ describe('Корректная работа страницы "Связный с�
      for (let iteration = 0; iteration < consequence[step].animation.length; iteration++) {
        cy.get('[class^="list_list__result"] > [class^="list_list__flex"] > [class^="circle_content"]').as('circle_content');
        cy.get('@circle_content').each(($circle_content, index) => {
-         cy.get($circle_content).find('[class^="circle_circle"]').as('circle');
-         cy.get($circle_content).find('[class*="circle_index"]').first().as('circle_index');
-         cy.get($circle_content).find('[class*="circle_tail"]').first().as('circle_tail');
+         cy.get($circle_content).find(CLASS_CIRCLE).as('circle');
+         cy.get($circle_content).find(CLASS_INDEX).first().as('circle_index');
+         cy.get($circle_content).find(CLASS_TAIL).first().as('circle_tail');
  
          cy.get('@circle').should('have.text', consequence[step].animation[iteration][index].value); //проверяем значение буквы в круге
          cy.get('@circle').should('have.css', 'border', consequence[step].animation[iteration][index].color); //проверяем цвет круга

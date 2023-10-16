@@ -1,5 +1,6 @@
 import { ColorTest } from "../../src/types/element-states";
 import { SHORT_DELAY_IN_MS } from "../../src/constants/delays"
+import { CLASS_CIRCLE, CLASS_CONTENT, CLASS_HEAD, CLASS_INDEX, CLASS_TAIL } from "../../src/constants/test";
 
 export const ButtonTest = {
   Add: 'button_add',
@@ -78,12 +79,12 @@ describe('Корректная работа страницы "Стек"', functi
       cy.get(`@${ButtonTest.Add}`).click();
 
       for (let iteration = 0; iteration < consequence[step].animation.length; iteration++) {
-        cy.get('[class^="circle_content"]').as('circle_content');
+        cy.get(CLASS_CONTENT).as('circle_content');
         cy.get('@circle_content').each(($circle_content, index) => {
-          cy.get($circle_content).find('[class^="circle_circle"]').as('circle');
-          cy.get($circle_content).find('[class*="circle_index"]').first().as('circle_index');
-          cy.get($circle_content).find('[class*="circle_head"]').first().as('circle_head');
-          cy.get($circle_content).find('[class*="circle_tail"]').first().as('circle_tail');
+          cy.get($circle_content).find(CLASS_CIRCLE).as('circle');
+          cy.get($circle_content).find(CLASS_INDEX).first().as('circle_index');
+          cy.get($circle_content).find(CLASS_HEAD).first().as('circle_head');
+          cy.get($circle_content).find(CLASS_TAIL).first().as('circle_tail');
 
           cy.get('@circle').should('have.text', consequence[step].animation[iteration][index].value); //проверяем значение буквы в круге
           cy.get('@circle').should('have.css', 'border', consequence[step].animation[iteration][index].color); //проверяем цвет круга
@@ -111,12 +112,12 @@ describe('Корректная работа страницы "Стек"', functi
     const step = 3;
 
     for (let iteration = 0; iteration < consequence[step].animation.length; iteration++) {
-      cy.get('[class^="circle_content"]').as('circle_content');
+      cy.get(CLASS_CONTENT).as('circle_content');
       cy.get('@circle_content').each(($circle_content, index) => {
-        cy.get($circle_content).find('[class^="circle_circle"]').as('circle');
-        cy.get($circle_content).find('[class*="circle_index"]').first().as('circle_index');
-        cy.get($circle_content).find('[class*="circle_head"]').first().as('circle_head');
-        cy.get($circle_content).find('[class*="circle_tail"]').first().as('circle_tail');
+        cy.get($circle_content).find(CLASS_CIRCLE).as('circle');
+        cy.get($circle_content).find(CLASS_INDEX).first().as('circle_index');
+        cy.get($circle_content).find(CLASS_HEAD).first().as('circle_head');
+        cy.get($circle_content).find(CLASS_TAIL).first().as('circle_tail');
 
         cy.get('@circle').should('have.text', consequence[step].animation[iteration][index].value); //проверяем значение буквы в круге
         cy.get('@circle').should('have.css', 'border', consequence[step].animation[iteration][index].color); //проверяем цвет круга
@@ -142,12 +143,12 @@ describe('Корректная работа страницы "Стек"', functi
     cy.get(`@${ButtonTest.Clear}`).click();
     const step = 4;
 
-    cy.get('[class^="circle_content"]').as('circle_content');
+    cy.get(CLASS_CONTENT).as('circle_content');
     cy.get('@circle_content').each(($circle_content, index) => {
-      cy.get($circle_content).find('[class^="circle_circle"]').as('circle');
-      cy.get($circle_content).find('[class*="circle_index"]').first().as('circle_index');
-      cy.get($circle_content).find('[class*="circle_head"]').first().as('circle_head');
-      cy.get($circle_content).find('[class*="circle_tail"]').first().as('circle_tail');
+      cy.get($circle_content).find(CLASS_CIRCLE).as('circle');
+      cy.get($circle_content).find(CLASS_INDEX).first().as('circle_index');
+      cy.get($circle_content).find(CLASS_HEAD).first().as('circle_head');
+      cy.get($circle_content).find(CLASS_TAIL).first().as('circle_tail');
 
       cy.get('@circle').should('have.text', consequence[step].animation[0][index].value); //проверяем значение буквы в круге
       cy.get('@circle').should('have.css', 'border', consequence[step].animation[0][index].color); //проверяем цвет круга
