@@ -134,8 +134,8 @@ export const ListPage: React.FC = () => {
       let newIter = animation;
       for (let i = 0; i <= index; i++) {
         if (i > 0) {
-          newIter[i - 1][2] = null;
-          newIter[i - 1][3] = null;
+          newIter[i - 1][2] = '';
+          newIter[i - 1][3] = '';
           newIter[i - 1][1] = 'changing';
         }
         newIter[i][2] = inputValue;

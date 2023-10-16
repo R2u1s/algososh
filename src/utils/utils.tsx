@@ -200,7 +200,7 @@ export const initQueue = (): Array<string[]> => {
 export const initLinkedList = (listArr: string[]): Array<Array<string | null>> => {
   const arr = [];
   for (let i = 0; i < listArr.length; i++) {
-    arr.push([listArr[i], 'default', null, null,null,null]);
+    arr.push([listArr[i], 'default', '', '','','']);
   }
   return arr;
 }
