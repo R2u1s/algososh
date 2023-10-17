@@ -6,6 +6,7 @@ import { Input } from "../ui/input/input";
 import { useForm } from "../../hooks/useForm";
 import { Circle } from "../ui/circle/circle";
 import { getFibonacciNumbers, arrayToIterations } from "../../utils/utils";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 const INPUT_TEXT = 'text';
 const MAX_NUMBER = 19;
@@ -31,7 +32,7 @@ export const FibonacciPage: React.FC = () => {
             setAnimation(iter);
             if (i === iterations.length-1) {
             setActiveFib(false)}
-          }, i * 500);
+          }, i * SHORT_DELAY_IN_MS);
         });
 
       }

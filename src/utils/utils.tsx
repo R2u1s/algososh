@@ -3,16 +3,18 @@ import { EnumMember } from "typescript"
 import { ElementStates } from "../types/element-states"
 import { QUEUE_SIZE } from "../components/queue-page/queue-page"
 import { Circle } from "../components/ui/circle/circle"
+import { CIRCLE_COLOR_DEFAULT,CIRCLE_COLOR_CHANGING,CIRCLE_COLOR_MODIFIED } from "../constants/color";
+
 
 export const elementColor = (index: string | null): ElementStates => {
   switch (index) {
-    case 'default': {
+    case CIRCLE_COLOR_DEFAULT: {
       return ElementStates.Default
     }
-    case 'changing': {
+    case CIRCLE_COLOR_CHANGING: {
       return ElementStates.Changing
     }
-    case 'modified': {
+    case CIRCLE_COLOR_MODIFIED: {
       return ElementStates.Modified
     }
     default:
@@ -22,7 +24,7 @@ export const elementColor = (index: string | null): ElementStates => {
 
 export const arrowColor = (color?: string): string => {
   switch (color) {
-    case 'changing': {
+    case CIRCLE_COLOR_CHANGING: {
       return '#D252E1'
     }
     default:
@@ -55,8 +57,8 @@ export const reverse = (str: string): Array<Array<string[]>> => {
   while (start < end + 1) {
     //добавляем итерацию анимации с выбранными буквами
     let newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-    newAnimation[start][1] = 'changing';
-    newAnimation[end][1] = 'changing';
+    newAnimation[start][1] = CIRCLE_COLOR_CHANGING;
+    newAnimation[end][1] = CIRCLE_COLOR_CHANGING;
     animationArr.push(newAnimation);
 
     //меняем местами первую и последнюю букву
@@ -66,15 +68,15 @@ export const reverse = (str: string): Array<Array<string[]>> => {
 
     //добавляем итерацию анимации с перемещенными буквами
     newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-    newAnimation[start] = [res[start], 'modified'];
-    newAnimation[end] = [res[end], 'modified'];
+    newAnimation[start] = [res[start], CIRCLE_COLOR_MODIFIED];
+    newAnimation[end] = [res[end], CIRCLE_COLOR_MODIFIED];
     animationArr.push(newAnimation);
 
     //увеличиваем указатель на первую букву и уменьшаем указатель на последнюю
     start++;
     end--;
   }
-  //console.log(animationArr);
+  
   return animationArr;
 }
 
@@ -120,11 +122,12 @@ const swap = (arr: number[], firstIndex: number, secondIndex: number): void => {
 export const firstSortIteration = (arr: number[]): Array<Array<Array<number | string>>> => {
   let animationArr = [];
   //первый кадр анимации - все цифры на исходном месте с исходным цветом
-  animationArr.push(arr.map((num) => { return [num, 'default'] }));
+  animationArr.push(arr.map((num) => { return [num, CIRCLE_COLOR_DEFAULT] }));
   return animationArr;
 }
 
 export const bubbleSort = (arr: number[], dir: boolean): Array<Array<Array<number | string>>> => {
+  if (!(arr.length > 0)) return [];
   const { length } = arr;
   //создаем массив подкадровой анимации
   let animationArr = [];
@@ -135,29 +138,31 @@ export const bubbleSort = (arr: number[], dir: boolean): Array<Array<Array<numbe
     for (let j = 0; j < length - i - 1; j++) {
       //новый кадр, в нём подсвечиваем два текущих числа
       let newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-      if (j > 0) newAnimation[j - 1][1] = 'default';
-      newAnimation[j][1] = 'changing';
-      newAnimation[j + 1][1] = 'changing';
+      if (j > 0) newAnimation[j - 1][1] = CIRCLE_COLOR_DEFAULT;
+      newAnimation[j][1] = CIRCLE_COLOR_CHANGING;
+      newAnimation[j + 1][1] = CIRCLE_COLOR_CHANGING;
       animationArr.push(newAnimation);
       if (dir ? arr[j] > arr[j + 1] : arr[j] < arr[j + 1]) {
         swap(arr, j, j + 1);
         //новый кадр, в нём подсвечиваем два текущих числа, которые поменялись местами
         newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-        newAnimation[j] = [arr[j], 'changing'];
-        newAnimation[j + 1] = [arr[j + 1], 'changing'];
+        newAnimation[j] = [arr[j], CIRCLE_COLOR_CHANGING];
+        newAnimation[j + 1] = [arr[j + 1], CIRCLE_COLOR_CHANGING];
         animationArr.push(newAnimation);
       }
     }
     //новый кадр, в нём последнее число - на своем месте, а предыдущее снова в исходном цвете
     let newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-    newAnimation[length - i - 2] = [arr[length - i - 2], 'default'];
-    newAnimation[length - i - 1] = [arr[length - i - 1], 'modified'];
+    if (length - i - 2 > 0) newAnimation[length - i - 2] = [arr[length - i - 2], CIRCLE_COLOR_DEFAULT];
+    newAnimation[length - i - 1] = [arr[length - i - 1], CIRCLE_COLOR_MODIFIED];
     animationArr.push(newAnimation);
   }
+
   return animationArr;
 }
 
 export const selectionSort = (arr: number[], dir: boolean): Array<Array<Array<number | string>>> => {
+  if (!(arr.length > 0)) return [];
   const { length } = arr;
   //создаем массив подкадровой анимации
   let animationArr = [];
@@ -169,27 +174,27 @@ export const selectionSort = (arr: number[], dir: boolean): Array<Array<Array<nu
     for (let j = maxInd + 1; j < length; j++) {
       //новый кадр, в нём подсвечиваем два текущих числа
       newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-      if (j > maxInd) newAnimation[j - 1][1] = 'default';
-      newAnimation[i][1] = 'changing';
-      newAnimation[j][1] = 'changing';
+      if (j > maxInd) newAnimation[j - 1][1] = CIRCLE_COLOR_DEFAULT;
+      newAnimation[i][1] = CIRCLE_COLOR_CHANGING;
+      newAnimation[j][1] = CIRCLE_COLOR_CHANGING;
       animationArr.push(newAnimation);
       if (dir ? arr[j] < arr[maxInd] : arr[j] > arr[maxInd]) maxInd = j;
     }
     swap(arr, i, maxInd);
     newAnimation = JSON.parse(JSON.stringify(animationArr[animationArr.length - 1]));
-    newAnimation[i] = [arr[i], 'modified'];
-    newAnimation[maxInd] = [arr[maxInd], 'default'];
-    newAnimation[length - 1][1] = 'default';
+    newAnimation[i] = [arr[i], CIRCLE_COLOR_MODIFIED];
+    newAnimation[maxInd] = [arr[maxInd], CIRCLE_COLOR_DEFAULT];
+    newAnimation[length - 1][1] = CIRCLE_COLOR_DEFAULT;
     animationArr.push(newAnimation);
   }
-  animationArr.push(arr.map((num) => { return [num, 'modified'] }));
+  animationArr.push(arr.map((num) => { return [num, CIRCLE_COLOR_MODIFIED] }));
   return animationArr;
 };
 
 export const initQueue = (): Array<string[]> => {
   const arr = [];
   for (let i = 0; i < QUEUE_SIZE; i++) {
-    arr.push(['', 'default']);
+    arr.push(['', CIRCLE_COLOR_DEFAULT]);
   }
   return arr;
 }
@@ -197,7 +202,7 @@ export const initQueue = (): Array<string[]> => {
 export const initLinkedList = (listArr: string[]): Array<Array<string | null>> => {
   const arr = [];
   for (let i = 0; i < listArr.length; i++) {
-    arr.push([listArr[i], 'default', null, null,null,null]);
+    arr.push([listArr[i], CIRCLE_COLOR_DEFAULT, '', '','','']);
   }
   return arr;
 }
